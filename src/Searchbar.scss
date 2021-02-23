@@ -8,14 +8,14 @@
   }
 
   &-container {
-    flex-grow: 0;
+    padding: 0 50px;
     .logo {
-      flex: 0;
+      flex: 0 1;
       height: $toolbar-item-height;
       justify-content: center;
     }
     .search-box {
-      flex: 0;
+      flex: 1 1;
       height: $toolbar-item-height;
 
       .icon {
@@ -25,7 +25,7 @@
       > input {
         border: none;
         border-radius: $border-radius 0 0 $border-radius;
-        width: 600px;
+        flex-grow: 1;
         &::placeholder {
           padding-left: $toolbar-padding;
         }
