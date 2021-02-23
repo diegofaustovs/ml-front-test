@@ -9,7 +9,8 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            hasResults: true,
+            showResults: false,
+            showDetails: false,
         };
     }
 
@@ -17,7 +18,10 @@ class App extends React.Component {
         return (
             <div className='app-root'>
                 <Searchbar />
-                {this.state.hasResults && <Results />}
+                {(this.state.showResults || this.state.showDetails) &&
+                <div className='content-root'>
+                    {this.state.showResults && <Results />}
+                </div>}
             </div>
         );
     }

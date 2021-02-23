@@ -26,9 +26,7 @@
         border: none;
         border-radius: $border-radius 0 0 $border-radius;
         flex-grow: 1;
-        &::placeholder {
-          padding-left: $toolbar-padding;
-        }
+        padding-left: $toolbar-padding;
       }
 
       > button {
