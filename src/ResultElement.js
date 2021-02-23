@@ -1,4 +1,4 @@
-export default function SearchElement(props) {
+export default function ResultElement(props) {
     return (
         <div className='search-element'>
             {props.element}
