@@ -8,7 +8,7 @@
   }
 
   &-container {
-    padding: 0 50px;
+    padding: 0 $external-border-padding;
     .logo {
       flex: 0 1;
       height: $toolbar-item-height;
@@ -33,6 +33,7 @@
 
       > button {
         align-items: center;
+        background-color: $ml-lighter-grey;
         border: none;
         border-radius: 0 $border-radius $border-radius 0;
         display: flex;
