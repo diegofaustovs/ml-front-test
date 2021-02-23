@@ -1,0 +1,44 @@
+@import './constants';
+
+.searchbar {
+  &-root {
+    background-color: $ml-yellow;
+    padding: $toolbar-padding 0;
+    justify-content: center;
+  }
+
+  &-container {
+    flex-grow: 0;
+    .logo {
+      flex: 0;
+      height: $toolbar-item-height;
+      justify-content: center;
+    }
+    .search-box {
+      flex: 0;
+      height: $toolbar-item-height;
+
+      .icon {
+        height: $icon-height;
+      }
+
+      > input {
+        border: none;
+        border-radius: $border-radius 0 0 $border-radius;
+        width: 600px;
+        &::placeholder {
+          padding-left: $toolbar-padding;
+        }
+      }
+
+      > button {
+        align-items: center;
+        border: none;
+        border-radius: 0 $border-radius $border-radius 0;
+        display: flex;
+        justify-content: center;
+        width: $toolbar-item-height;
+      }
+    }
+  }
+}
