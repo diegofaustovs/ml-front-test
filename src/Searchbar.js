@@ -18,7 +18,7 @@ class Searchbar extends React.Component {
     }
 
     submitSearch = () => {
-        console.log(this.state.inputValue);
+        this.props.searchProducts(this.state.inputValue);
     }
 
     render() {

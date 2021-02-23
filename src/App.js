@@ -9,18 +9,23 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showResults: false,
+            showResults: true,
             showDetails: false,
+            results: ['1','2','3'],
         };
+    }
+
+    searchProducts = (query) => {
+        console.log("APP:" + query);
     }
 
     render() {
         return (
             <div className='app-root'>
-                <Searchbar />
+                <Searchbar searchProducts={this.searchProducts}/>
                 {(this.state.showResults || this.state.showDetails) &&
                 <div className='content-root'>
-                    {this.state.showResults && <Results />}
+                    {this.state.showResults && <Results results={this.state.results}/>}
                 </div>}
             </div>
         );
