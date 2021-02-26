@@ -19,13 +19,32 @@ class App extends React.Component {
         };
     }
 
+    componentDidMount() {
+        this.updateNavigation();
+    }
+
+    updateNavigation() {
+        const currentPath = window.location.href;
+        if(currentPath === '/') {
+            this.setState({showResults: false, showDetails: false})
+        }
+        else if (currentPath.includes('search')) {
+            const productName = currentPath.split("=")[1];
+            this.searchProducts(productName);
+        }
+        else if (currentPath.includes('/items/') && !currentPath.includes('search')) {
+            const productId = currentPath.split("/")[4];
+            this.goToDetail(productId);
+        }
+    }
+
     searchProducts = (query) => {
         this.setState({
             isLoading: true,
             showResults: false,
             showDetails: false
         });
-        fetch(`https://api.mercadolibre.com/sites/MLA/search?q="${query}"&limit=4`)
+        fetch(`https://api.mercadolibre.com/sites/MCO/search?q="${query}"&limit=4`)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -81,25 +100,28 @@ class App extends React.Component {
     }
 
     navigateHome = () => {
-        this.setState({
-           showDetails: false,
-           showResults: false,
-           details: [],
-           results: [],
-        });
+        window.location.pathname = '/';
+    }
+
+    navigateToResults = (query) => {
+        window.location.pathname = `/items?search=${query}`;
+    }
+
+    navigateToDetail = (id) => {
+        window.location.pathname = `/items/${id}`;
     }
 
     render() {
         return (
             <div className='app-root'>
-                <Searchbar searchProducts={this.searchProducts} navigateHome={this.navigateHome}/>
+                <Searchbar searchProducts={this.navigateToResults} navigateHome={this.navigateHome}/>
                 {(this.state.showResults || this.state.showDetails) &&
                 <div className='content-root'>
                     {this.state.isLoading && <div>LOADING ...</div>}
 
                     {this.state.showResults && <Results
                         results={this.state.results}
-                        goToDetail={this.goToDetail}
+                        goToDetail={this.navigateToDetail}
                     />}
 
                     {this.state.showDetails && <ElementDetail

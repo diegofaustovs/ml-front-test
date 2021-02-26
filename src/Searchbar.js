@@ -7,6 +7,13 @@ import search_icon from './assets/icon_search.png';
 
 class Searchbar extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            inputValue: "",
+        }
+    }
+
     handleInputChange = value => {
         this.setState( {inputValue: value});
     }
@@ -18,7 +25,9 @@ class Searchbar extends React.Component {
     }
 
     submitSearch = () => {
-        this.props.searchProducts(this.state.inputValue);
+        if(this.state.inputValue) {
+            this.props.searchProducts(this.state.inputValue);
+        }
     }
 
     render() {
