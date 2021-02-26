@@ -24,33 +24,32 @@ class App extends React.Component {
             showResults: false,
             showDetails: false
         });
-        fetch(`https://api.mercadolibre.com/sites/MLA/search?q="${query}"&limit=8`)
+        fetch(`https://api.mercadolibre.com/sites/MLA/search?q="${query}"&limit=4`)
             .then(res => res.json())
             .then(
                 (result) => {
                     this.setState({
                         isLoading: false,
                         results: result.results,
-                        showResults: true
+                        showResults: true,
                     });
                 },
                 (error) => {
                     console.log(error);
                 }
             );
-        console.log("SEARCH:" + query);
+        console.log("SEARCH: " + query);
     }
 
     goToDetail = (id) => {
         this.setState({
             showResults: false,
-            isLoading: true
+            isLoading: true,
         });
         fetch(`https://api.mercadolibre.com/items/${id}`)
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result);
                     this.setState({
                         isLoading: false,
                         details: result,
@@ -61,7 +60,7 @@ class App extends React.Component {
                     console.log(error);
                 }
             );
-        console.log("DETAIL:" + id);
+        console.log("DETAIL: " + id);
     }
 
     navigateHome = () => {
