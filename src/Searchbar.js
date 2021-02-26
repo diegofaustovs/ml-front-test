@@ -26,7 +26,7 @@ class Searchbar extends React.Component {
             <div className='searchbar-root'>
                 <div className='searchbar-container'>
                     <div className='logo'>
-                        <img src={logo} alt='Mercado Libre'/>
+                        <img src={logo} onClick={() => this.props.navigateHome()} alt='Mercado Libre'/>
                     </div>
                     <div className='search-box'>
                         <input
@@ -34,11 +34,10 @@ class Searchbar extends React.Component {
                             onChange={e => this.handleInputChange(e.target.value)}
                             onKeyPress={e => this.handleKeyPress(e.code)}
                             placeholder='Nunca dejes de buscar'/>
-                        <button>
+                        <button onClick={() => this.submitSearch()}>
                             <img
                                 src={search_icon}
                                 className='icon'
-                                onClick={() => this.submitSearch()}
                                 alt='Search'/>
                         </button>
                     </div>

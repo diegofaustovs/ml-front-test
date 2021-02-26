@@ -2,6 +2,7 @@ import React from 'react';
 
 import Searchbar from './Searchbar';
 import Results from './Results';
+import ElementDetail from './ElementDetail';
 
 import './App.scss'
 
@@ -9,23 +10,78 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showResults: true,
+            isLoading: false,
+            showResults: false,
             showDetails: false,
-            results: ['1','2','3'],
+            results: [],
+            details: [],
         };
     }
 
     searchProducts = (query) => {
-        console.log("APP:" + query);
+        this.setState({
+            isLoading: true,
+            showResults: false,
+            showDetails: false
+        });
+        fetch(`https://api.mercadolibre.com/sites/MLA/search?q="${query}"&limit=8`)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({
+                        isLoading: false,
+                        results: result.results,
+                        showResults: true
+                    });
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        console.log("SEARCH:" + query);
+    }
+
+    goToDetail = (id) => {
+        this.setState({
+            showResults: false,
+            isLoading: true
+        });
+        fetch(`https://api.mercadolibre.com/items/${id}`)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    this.setState({
+                        isLoading: false,
+                        details: result,
+                        showDetails: true
+                    });
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        console.log("DETAIL:" + id);
+    }
+
+    navigateHome = () => {
+        this.setState({
+           showDetails: false,
+           showResults: false,
+           details: [],
+           results: [],
+        });
     }
 
     render() {
         return (
             <div className='app-root'>
-                <Searchbar searchProducts={this.searchProducts}/>
+                <Searchbar searchProducts={this.searchProducts} navigateHome={this.navigateHome}/>
                 {(this.state.showResults || this.state.showDetails) &&
                 <div className='content-root'>
-                    {this.state.showResults && <Results results={this.state.results}/>}
+                    {this.state.isLoading && <div>LOADING ...</div>}
+                    {this.state.showResults && <Results results={this.state.results} goToDetail={this.goToDetail}/>}
+                    {this.state.showDetails && <ElementDetail element={this.state.details} />}
                 </div>}
             </div>
         );

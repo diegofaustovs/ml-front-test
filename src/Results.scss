@@ -13,6 +13,25 @@
         padding-bottom: 0;
         margin-bottom: 0;
       }
+
+      .attribs {
+        flex-direction: column;
+        flex-grow: 3;
+        flex-shrink: 0;
+        .price {
+
+        }
+      }
+
+      .city {
+        font-size: 12px;
+        color: $ml-light-grey;
+      }
+
+      .thumb {
+        padding: 0 16px;
+        height: 120px;
+      }
     }
   }
 }
