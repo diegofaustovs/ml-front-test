@@ -15,6 +15,7 @@ class App extends React.Component {
             showDetails: false,
             results: [],
             details: [],
+            description: [],
         };
     }
 
@@ -55,12 +56,28 @@ class App extends React.Component {
                         details: result,
                         showDetails: true
                     });
+                    this.loadDescription(id);
                 },
                 (error) => {
                     console.log(error);
                 }
             );
         console.log("DETAIL: " + id);
+    }
+
+    loadDescription(id) {
+        fetch(`https://api.mercadolibre.com/items/${id}/description`)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({
+                        description: result,
+                    });
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
     }
 
     navigateHome = () => {
@@ -79,8 +96,16 @@ class App extends React.Component {
                 {(this.state.showResults || this.state.showDetails) &&
                 <div className='content-root'>
                     {this.state.isLoading && <div>LOADING ...</div>}
-                    {this.state.showResults && <Results results={this.state.results} goToDetail={this.goToDetail}/>}
-                    {this.state.showDetails && <ElementDetail element={this.state.details} />}
+
+                    {this.state.showResults && <Results
+                        results={this.state.results}
+                        goToDetail={this.goToDetail}
+                    />}
+
+                    {this.state.showDetails && <ElementDetail
+                        element={this.state.details}
+                        description={this.state.description}
+                    />}
                 </div>}
             </div>
         );

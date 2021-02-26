@@ -1,0 +1,28 @@
+@import './constants';
+
+.element-detail {
+  .col-info {
+    flex-grow: 3;
+    flex-flow: column;
+    .description {
+      white-space: pre-line;
+    }
+  }
+
+  .col-buy {
+    flex-flow: column;
+    .seller-info {
+      font-size: $small-font;
+    }
+    .buy {
+      padding: $button-padding 0;
+      border: none;
+      color: $white;
+      background-color: $ml-blue;
+      border-radius: $border-radius;
+    }
+    > span {
+      padding-bottom: $base-padding;
+    }
+  }
+}

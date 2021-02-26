@@ -24,12 +24,12 @@
       }
 
       .city {
-        font-size: 12px;
+        font-size: $small-font;
         color: $ml-light-grey;
       }
 
       .thumb {
-        padding: 0 16px;
+        padding: 0 $base-padding;
         height: 120px;
       }
     }
