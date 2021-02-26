@@ -19,18 +19,22 @@
         flex-grow: 3;
         flex-shrink: 0;
         .price {
-
+          font-size: $large-font;
+          .free-shipping {
+            height: $icon-height;
+            padding-left: 5px;
+          }
         }
       }
 
       .city {
-        font-size: $small-font;
+        font-size: $x-small-font;
         color: $ml-light-grey;
       }
 
       .thumb {
         padding: 0 $base-padding;
-        height: 120px;
+        height: $picture-height;
       }
     }
   }
