@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Breadcrumbs from './Breadcrumbs';
 import Searchbar from './Searchbar';
 import Results from './Results';
 import ElementDetail from './ElementDetail';
@@ -54,6 +53,7 @@ class App extends React.Component {
                         results: result.results,
                         showResults: true,
                     });
+                    this.getMostPopularCat();
                 },
                 (error) => {
                     console.log(error);
@@ -77,6 +77,7 @@ class App extends React.Component {
                         showDetails: true
                     });
                     this.loadDescription(id);
+                    this.getMostPopularCat();
                 },
                 (error) => {
                     console.log(error);
@@ -93,6 +94,25 @@ class App extends React.Component {
                     this.setState({
                         description: result,
                     });
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+    }
+
+    getMostPopularCat = () => {
+        var categories = this.state.results?.map(r => r.category_id);
+        var mostPop = categories.sort((a,b) =>
+            categories.filter(v => v===a).length
+            - categories.filter(v => v===b).length
+        ).pop();
+        fetch(`https://api.mercadolibre.com/categories/${mostPop}`)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    var catNames = result.path_from_root.map(r => r.name);
+                    this.setState({crumbs: catNames.join(" > ")});
                 },
                 (error) => {
                     console.log(error);
@@ -118,7 +138,7 @@ class App extends React.Component {
                 <Searchbar searchProducts={this.navigateToResults} navigateHome={this.navigateHome}/>
                 {(this.state.showResults || this.state.showDetails) &&
                 <div className='breadcrumbs-root'>
-                    <Breadcrumbs />
+                    {this.state.crumbs}
                 </div>}
                 {(this.state.showResults || this.state.showDetails) &&
                 <div className='content-root'>
