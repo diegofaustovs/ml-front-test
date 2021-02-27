@@ -5,6 +5,9 @@
     background-color: $ml-yellow;
     padding: $toolbar-padding 0;
     justify-content: center;
+    display: block;
+    width: 100%;
+    position: fixed;
   }
 
   &-container {

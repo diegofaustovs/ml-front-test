@@ -5,7 +5,8 @@
     flex-direction: column;
 
     .breadcrumbs-root {
-      margin: $item-separation $external-border-padding 0 $external-border-padding;
+      padding: $item-separation $external-border-padding 0 $external-border-padding;
+      margin-top: 64px;
       font-size: $small-font;
       color: $ml-light-grey;
     }
