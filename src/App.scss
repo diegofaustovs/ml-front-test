@@ -4,10 +4,16 @@
   &-root {
     flex-direction: column;
 
+    .breadcrumbs-root {
+      margin: $item-separation $external-border-padding 0 $external-border-padding;
+      font-size: $small-font;
+      color: $ml-light-grey;
+    }
+
     .content-root {
       background-color: $white;
       border-radius: $border-radius;
-      margin: $item-separation $external-border-padding;
+      margin: $base-padding $external-border-padding;
       padding: $base-padding $large-padding;
     }
   }

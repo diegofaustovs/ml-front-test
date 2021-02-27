@@ -9,7 +9,12 @@ export default function ResultElement(props) {
             <div className='attribs'>
                 <div className='price'>
                     <span>$ {Number(props.element.price).toLocaleString('es-co')}</span>
-                    {props.element.shipping.free_shipping && <img className='free-shipping' src={shipping_icon}/>}
+                    {props.element.shipping.free_shipping &&
+                    <img
+                        className='free-shipping'
+                        src={shipping_icon}
+                        alt='Free shipping'
+                    />}
                 </div>
                 <div className='name'>
                     <a href={`/items/${props.element.id}`}>

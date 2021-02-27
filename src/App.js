@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Breadcrumbs from './Breadcrumbs';
 import Searchbar from './Searchbar';
 import Results from './Results';
 import ElementDetail from './ElementDetail';
@@ -116,9 +117,12 @@ class App extends React.Component {
             <div className='app-root'>
                 <Searchbar searchProducts={this.navigateToResults} navigateHome={this.navigateHome}/>
                 {(this.state.showResults || this.state.showDetails) &&
+                <div className='breadcrumbs-root'>
+                    <Breadcrumbs />
+                </div>}
+                {(this.state.showResults || this.state.showDetails) &&
                 <div className='content-root'>
                     {this.state.isLoading && <div>LOADING ...</div>}
-
                     {this.state.showResults && <Results
                         results={this.state.results}
                         goToDetail={this.navigateToDetail}
