@@ -45,7 +45,7 @@ class App extends React.Component {
             showResults: false,
             showDetails: false
         });
-        fetch(`https://api.mercadolibre.com/sites/MCO/search?q="${query}"&limit=4`)
+        fetch(`https://api.mercadolibre.com/sites/MCO/search?q="${query}"&limit=12`)
             .then(res => res.json())
             .then(
                 (result) => {
